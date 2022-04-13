@@ -1,0 +1,121 @@
+/* 共通の CSS */
+/* box-sizingを使用する */
+html {
+  box-sizing: border-box;
+}
+
+*, *::before, *::after {
+  box-sizing: inherit;
+}
+
+/* container */
+.container {
+  position: relative;
+}
+
+@media screen and (min-width: 600px) {
+  .container {
+    width: 80%;
+    margin: auto;
+  }
+}
+
+/* index.html */
+.headline {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.headline h1 {
+  margin: 0;
+}
+
+.link-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+/* student id & name */
+.namebox {
+  position: absolute;
+  top: 0;
+  right: 0;
+  text-align: right;
+}
+
+/* button-like element support */
+.btn {
+  color: hsl(220, 100%, 98%);
+  background: hsl(220, 100%, 40%);
+  cursor: pointer;
+  text-decoration: none;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+}
+
+.btn:hover {
+  background: hsl(220, 100%, 20%);
+}
+
+.btn:active {
+  background: hsl(220, 100%, 10%);
+}
+
+/* error message support */
+.error-message {
+  color: hsla(0, 100%, 27%, 1);
+  background-color: hsla(0, 100%, 90%, 1);
+  padding: 4px;
+  display: flex;
+  align-items: center;
+}
+
+.error-message:hover {
+  cursor: pointer;
+}
+
+.error-message::before {
+  content: "\02715";
+  /* &times; */
+  background-color: hsla(0, 100%, 90%, 1);
+  margin-right: 8px;
+  width: 1.2rem;
+  height: 1.2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* レイアウト */
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.col-stretch>div {
+  flex: 1 0 auto;
+}
+
+.cols31>div:nth-child(1) {
+  flex: 3 0 auto;
+}
+
+.cols31>div:nth-child(2) {
+  flex: 1 0 auto;
+}
+
+/* Simple animation support */
+@keyframes blink {
+  0% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}

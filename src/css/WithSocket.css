@@ -1,0 +1,27 @@
+.with-socket {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 0 0 0.2rem 0;
+  border-bottom: 1px solid hsl(0, 0%, 90%);
+  margin: 0 0 0.5rem 0;
+}
+
+.with-socket>span {
+  flex: 0 0 auto;
+  font-family: monospace;
+  font-size: 120%;
+}
+
+.with-socket>span::before {
+  content: '[';
+}
+
+.with-socket>span::after {
+  content: ']';
+}
+
+.with-socket.with-socket-connected>span{
+  font-weight: bolder;
+}

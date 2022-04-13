@@ -1,0 +1,38 @@
+/* athentication page */
+.authenticate {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0 2rem;
+  width: max-content;
+  margin: auto;
+}
+
+.authenticate>label {
+  display: flex;
+  gap: 0.2rem;
+}
+
+.authenticate>label>span {
+  flex: 1 0 30%;
+  text-align: right;
+}
+
+.authenticate>label>input {
+  flex: 1 0;
+  font-size: 100%;
+}
+
+.authenticate>button {
+  align-self: center;
+}
+
+.authenticate-logout {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: monospace;
+  font-size: 120%;
+  font-weight: bold;
+  margin: 0.5rem 0;
+}

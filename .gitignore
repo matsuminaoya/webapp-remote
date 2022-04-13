@@ -1,0 +1,9 @@
+/.parcel-cache
+/.archive
+/.data
+/.demo
+/.env*
+/.ignore
+/.history
+/dist
+/node_modules
