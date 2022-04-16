@@ -19,4 +19,53 @@
   text-decoration: underline;
 }
 
+.table {
+  display: flex;
+  flex-direction: column;
+}
+
+.table .cells {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: row;
+}
+
+.table .cell {
+  flex: 1 1 auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.table .cell:nth-child(1) {
+  width: 40%;
+}
+
+.table .cell:nth-child(2) {
+  width: 60%;
+}
+
+.table .header {
+  background-color: grey;
+  color: white;
+  font-weight: bold;
+}
+
+.table {
+  height: 12rem;
+}
+
+.table {
+  border-top: 1px solid gray;
+}
+
+.table .cell {
+  border-bottom: 1px solid black;
+}
+
+.table .cells:nth-child(1) .cell {
+  border-bottom: 1px solid gray;
+}
+
 /* ここまで */
