@@ -7,11 +7,16 @@
 .itemize .item::before {
   content: "\2022";
   padding: 0 0.5rem;
+  display: inline-block;
 }
 
 .itemize .item {
   margin: 1rem 0 1rem 1.5rem;
 }
 
+.itemize .item:hover {
+  color: red;
+  text-decoration: underline;
+}
 
 /* ここまで */
