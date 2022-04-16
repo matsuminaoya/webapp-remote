@@ -1,6 +1,8 @@
- /* ミニ課題用 CSS定義 */
+/* ミニ課題用 CSS定義 */
 /* ここから */
-
+.separator {
+  border-bottom: 2px solid blue;
+}
 
 
 
