@@ -73,14 +73,20 @@
 .table-transposed {
   display: flex;
   flex-direction: row;
-  height: 12rem;
-  border-left: 1px solid grey;
 }
 
 .table-transposed .cells {
+  flex: 1 1 auto;
   display: flex;
   flex-direction: column;
-  border-right: 1px solid grey;
+}
+
+.table-transposed .cell {
+  flex: 1 1 auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .table-transposed .cell:nth-child(1) {
@@ -91,7 +97,27 @@
   height: 60%;
 }
 
+.table-transposed .header {
+  background-color: grey;
+  color: white;
+  font-weight: bold;
+}
 
+.table-transposed {
+  height: 12rem;
+}
+
+.table-transposed {
+  border-left: 1px solid gray;
+}
+
+.table-transposed .cell {
+  border-right: 1px solid black;
+}
+
+.table-transposed .cells:nth-child(1) .cell {
+  border-right: 1px solid gray;
+}
 
 .button-list {
   text-align: center;
