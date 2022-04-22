@@ -4,7 +4,7 @@
   height: 0.5rem;
   margin: 0 0 0.5rem 0;
   border-bottom: 2px solid blue;
-  }
+}
 
 .itemize .item::before {
   content: "\2022";
@@ -68,6 +68,33 @@
 
 .table .cells:nth-child(1) .cell {
   border-bottom: 1px solid gray;
+}
+
+.table-transposed {
+  display: flex;
+  flex-direction: row;
+  height: 12rem;
+  border-left: 1px solid grey;
+}
+
+.table-transposed .cells {
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid grey;
+}
+
+.table-transposed .cell:nth-child(1) {
+  height: 40%;
+}
+
+.table-transposed .cell:nth-child(2) {
+  height: 60%;
+}
+
+
+
+.button-list {
+  text-align: center;
 }
 
 /* ここまで */
