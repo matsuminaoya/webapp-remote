@@ -29,29 +29,54 @@
     <!-- Reactコンポーネントの配置場所 -->
     <div id="root"></div>
     <!-- ここから -->
-    <div>
-      <h3>色付きの水平線</h3>
-      <div class="separator"></div>
-      <h3>水平線の色を変える</h3>
-      <div class="button-list" id="color-buttons">
-        <button type="button">青</button>
-        <button type="button">黄</button>
-        <button type="button">赤</button>
-      </div>
-      <h3>箇条書き</h3>
-      <div class="itemize">
-        <div class="item">URI</div>
-        <div class="item">HTTP</div>
-        <div class="item">HTML</div>
-      </div>
-      <h3>箇条書きのフォントサイズを変える</h3>
+    <h2>第4週ミニ課題</h2>
+    <h3>カウンタ</h3>
+    <div id="counter">
+      <div id="counter-out">0</div>
       <div class="button-list">
-        <button type="button" id="bigger-button">フォントを大きく</button>
-        <button type="button" id="smaller-button">フォントを小さく</button>
-        <button type="button" id="reset-button">リセット</button>
+        <button type="button" id="counter-up">アップ</button>
+        <button type="button" id="counter-down">ダウン</button>
+        <button type="button" id="counter-reset">リセット</button>
       </div>
-      <h3>フレックスボックスを使った表</h3>
     </div>
+    <h3>クロック</h3>
+    <div id="clock"></div>
+    <h3>ストップウォッチ</h3>
+    <div id="stopwatch">
+      <div id="stopwatch-out"></div>
+      <div class="button-list">
+        <button type="button" id="stopwatch-start-stop">スタート</button>
+        <button type="button" id="stopwatch-reset">リセット</button>
+        <button type="button" id="stopwatch-lap">ラップ</button>
+      </div>
+      <div id="stopwatch-lap-list"></div>
+    </div>
+
+    <br>
+    <h2>第3週ミニ課題</h2>
+    <h3>色付きの水平線</h3>
+    <div class="separator"></div>
+    <h3>水平線の色を変える</h3>
+    <div class="button-list" id="color-buttons">
+      <button type="button">青</button>
+      <button type="button">黄</button>
+      <button type="button">赤</button>
+    </div>
+
+    <h3>箇条書き</h3>
+    <div class="itemize">
+      <div class="item">URI</div>
+      <div class="item">HTTP</div>
+      <div class="item">HTML</div>
+    </div>
+    <h3>箇条書きのフォントサイズを変える</h3>
+    <div class="button-list">
+      <button type="button" id="bigger-button">フォントを大きく</button>
+      <button type="button" id="smaller-button">フォントを小さく</button>
+      <button type="button" id="reset-button">リセット</button>
+    </div>
+
+    <h3>フレックスボックスを使った表</h3>
     <div class="table">
       <div class="cells header">
         <div class="cell">技術</div>
@@ -70,13 +95,11 @@
         <div class="cell">プログラミング言語</div>
       </div>
     </div>
-    <div>
-      <h3>表の向きを変える</h3>
-      <div class="button-list">
-        <button type="button" id="transpose-button">表の向きを変える</button>
-      </div>
-      <br>
+    <h3>表の向きを変える</h3>
+    <div class="button-list">
+      <button type="button" id="transpose-button">表の向きを変える</button>
     </div>
+    <br>
     <!-- ここまで -->
   </div>
 

@@ -121,6 +121,61 @@
 
 .button-list {
   text-align: center;
+  padding: 0.5rem;
+}
+
+/* 第4週 */
+#counter {
+  padding: 1rem;
+  border: 1px dotted grey;
+  border-radius: 8px;
+  width: max-content;
+  margin: auto;
+}
+
+#counter-out {
+  text-align: center;
+  font-size: 200%;
+  font-weight: bold;
+}
+
+#clock {
+  padding: 1rem;
+  border: 1px dotted grey;
+  border-radius: 8px;
+  width: max-content;
+  margin: auto;
+  text-align: center;
+  font-size: 280%;
+  font-weight: bold;
+}
+
+#stopwatch {
+  padding: 1rem;
+  border: 1px dotted grey;
+  border-radius: 8px;
+  width: max-content;
+  margin: auto;
+}
+
+#stopwatch-out {
+  text-align: center;
+  font-family: monospace;
+  font-size: 370%;
+  font-weight: bold;
+}
+
+#stopwatch-lap-list .stopwatch-lap-entry {
+  display: flex;
+  justify-content: space-around;
+  font-family: monospace;
+  font-weight: bold;
+  padding: 0.2rem;
+}
+
+#stopwatch-lap-list .stopwatch-lap-entry .stopwatch-lap-num {
+  width: 1rem;
+  text-align: right;
 }
 
 /* ここまで */
