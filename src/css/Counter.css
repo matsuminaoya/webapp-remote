@@ -1,0 +1,20 @@
+.counter {
+  padding: 1rem;
+  border: 1px dotted grey;
+  border-radius: 8px;
+  width: max-content;
+  margin: auto;
+}
+
+.counter-out {
+  text-align: center;
+  font-size: 200%;
+  font-weight: bold;
+}
+
+.counter-button-list {
+  display: flex;
+  justify-content: space-between;
+  gap: 4px;
+  padding: 0.5rem;
+}

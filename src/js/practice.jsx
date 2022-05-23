@@ -5,11 +5,11 @@ import ReactDOM from 'react-dom';
 
 // デバッグ用にエラー発生時にエラーメッセージを表示するコンポーネントで囲む．
 import { ErrorBoundary } from './ErrorBoundary';
-
+import { Counter } from './Counter';
 // コンポーネントの定義をimportする．
 import { Hello } from './Hello';
 /* ここから */
-
+import { Counter } from './Counter';
 
 
 
@@ -20,13 +20,12 @@ import { Hello } from './Hello';
 ReactDOM.render(
   // Reactコンポーネントの配置．JSXで記述できる．
   <ErrorBoundary>
-    <Hello />
+    {/*<Hello />*/}
     {/* ここから */}
-
-
-
-
-
+    <div className="row">
+      <Counter initial={5} min={0} max={10} />
+      <Counter initial={5} min={0} max={10} />
+    </div>
     {/* ここまで */}
   </ErrorBoundary>,
   // id属性がrootのHTML要素を求める．

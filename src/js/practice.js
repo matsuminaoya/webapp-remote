@@ -74,10 +74,8 @@ const stopwatch = () => {
   const out = document.getElementById('stopwatch-out');
   const resetBtn = document.getElementById('stopwatch-reset');
   const startStopBtn = document.getElementById('stopwatch-start-stop');
-
   const lapBtn = document.getElementById('stopwatch-lap');
   const lapListEl = document.getElementById('stopwatch-lap-list');
-
   let startTime = 0;
   let offset = 0;
   let displayTime = 0;
@@ -91,7 +89,6 @@ const stopwatch = () => {
     clearTimeout(timer);
     timer = null;
   };
-
   const lapList = [];
   const clearLapList = () => {
     lapList.splice(0);
@@ -118,7 +115,6 @@ const stopwatch = () => {
     lapSplittimeEl.innerText = timeToString(displayTime);
     lapListEl.prepend(lapEntryEl);
   };
-
   const pad2 = (x) => (x < 10 ? '0' : '') + x;
   const timeToString = (time) => {
     time = Math.floor(time / 100);
@@ -156,12 +152,10 @@ const stopwatch = () => {
     }
   };
   startStopBtn.addEventListener('click', handleStartStop);
-
   const handleLap = () => {
     recordLap();
   };
   lapBtn.addEventListener('click', handleLap);
-
   resetBtn.click();
 };
 stopwatch();
