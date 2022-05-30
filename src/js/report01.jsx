@@ -12,6 +12,7 @@ import { Clock } from './Clock';
 import { Counter } from './Counter';
 import { Stopwatch } from './Stopwatch';
 import { Countdown } from './Countdown';
+import { Presentation } from './Presentation';
 
 /* ここまで */
 
@@ -20,11 +21,11 @@ ReactDOM.render(
   // Reactコンポーネントの配置．JSXで記述できる．
   <ErrorBoundary>
     {/* ここから */}
-    <Clock />
-    <Counter />
+    <Presentation />
     <Stopwatch />
     <Countdown />
-
+    <Clock />
+    <Counter />
 
     {/* ここまで */}
   </ErrorBoundary>,

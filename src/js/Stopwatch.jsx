@@ -1,3 +1,4 @@
+import { MaxKey } from 'mongodb';
 import { useState, useEffect, useRef } from 'react';
 
 export const Stopwatch = (props) => {
@@ -6,6 +7,7 @@ export const Stopwatch = (props) => {
   const [lapList, setLapList] = useState([]);
   const startRef = useRef(0);
   const offsetRef = useRef(0);
+
   useEffect(() => {
     let timer = running ? setTimeout(() => {
       setDisplayTime(Date.now() - startRef.current + offsetRef.current);
@@ -44,6 +46,7 @@ export const Stopwatch = (props) => {
   };
   return (
     <div className="stopwatch">
+      <div className="stopwatch-name">{"ストップウォッチ"}</div>
       <div className="stopwatch-out">{timeToString(displayTime)}</div>
       <div className="stopwatch-button-list">
         <button type="button" onClick={startStop}>
@@ -52,16 +55,25 @@ export const Stopwatch = (props) => {
         <button type="button" onClick={lap} disabled={!running}>ラップ</button>
       </div>
       {lapList.length === 0 ? null :
-        <div className="stopwatch-lap-list">
-          {(lapList.map((lap, index) => (
-            <div className="stopwatch-lap-entry" key={index}>
-              <span className="stopwatch-lap-num">{index + 1}</span>
-              <span className="stopwatch-laptime">
-                {timeToString(lap - (index === 0 ? 0 : lapList[index - 1]))}
-              </span>
-              <span className="stopwatch-splittime">{timeToString(lap)}</span>
-            </div>
-          ))).reverse()}
-        </div>} </div>
+        <div className="stopwatch-lap">
+          <div className="stopwatch-lap-label">
+            <span className="stopwatch-lap-num">{"lap"}</span>
+            <span className="stopwatch-lap-laptime">{"time"}</span>
+            <span className="stopwatch-lap-total">{"total"}</span>
+          </div>
+          <div className="stopwatch-lap-list">
+            {(lapList.map((lap, index) => (
+              <div className="stopwatch-lap-entry" key={index}>
+                <span className="stopwatch-lap-num">{index + 1}</span>
+                <span className="stopwatch-laptime">
+                  {timeToString(lap - (index === 0 ? 0 : lapList[index - 1]))}
+                </span>
+                <span className="stopwatch-splittime">{timeToString(lap)}</span>
+              </div>
+            ))).reverse()}
+          </div>
+        </div>
+      }
+    </div>
   );
 };

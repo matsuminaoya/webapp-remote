@@ -1,17 +1,19 @@
 import { useState, useEffect, useRef } from 'react';
 
 export const Countdown = (props) => {
-  const [countTime, setCountTime] = useState(900000)
+  const [countTime, setCountTime] = useState(0)
   const [displayTime, setDisplayTime] = useState(countTime);
   const [running, setRunning] = useState(false);
   const startRef = useRef(0);
   const offsetRef = useRef(0);
 
   useEffect(() => {
-    let timer = running ? setTimeout(() => {
-      setDisplayTime(countTime - Date.now() + startRef.current - offsetRef.current);
-    }, 100) : null;
-    return () => clearTimeout(timer);
+    if (displayTime > 100) {
+      let timer = running ? setTimeout(() => {
+        setDisplayTime(countTime - Date.now() + startRef.current - offsetRef.current);
+      }, 100) : null;
+      return () => clearTimeout(timer);
+    }
   }, [displayTime, running]);
 
   const startStop = () => {
@@ -57,9 +59,10 @@ export const Countdown = (props) => {
   };
 
   return (
-    <div className="countdowntimer">
-      <div ClassName="countdowntimer-out">{timeToString(displayTime)}</div>
-      <div className="stopwatch-button-list">
+    <div className="countdown">
+      <div className="countdown-name">{"キッチンタイマ"}</div>
+      <div className="countdown-out">{(displayTime > 99) ? timeToString(displayTime) : timeToString(0)}</div>
+      <div className="countdown-button-list">
         <button type="button" onClick={startStop}>{running ? 'ストップ' : 'スタート'}</button>
         <button type="button" onClick={countTime10mUP} disabled={running || displayTime >= 3600000 - 600000}>+10分</button>
         <button type="button" onClick={countTime01mUP} disabled={running || displayTime >= 3600000 - 60000}>+01分</button>

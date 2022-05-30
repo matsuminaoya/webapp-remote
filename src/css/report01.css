@@ -7,7 +7,9 @@
 
 /* ここから */
 @import './Clock.css';
-
-
+@import './Counter.css';
+@import './Stopwatch.css';
+@import './Countdown.css';
+@import './Presentation.css';
 
 /* ここまで */

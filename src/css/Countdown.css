@@ -1,4 +1,4 @@
-.counter {
+.countdown {
   padding: 1rem;
   border: 1px dotted grey;
   border-radius: 8px;
@@ -6,19 +6,21 @@
   margin: 1rem auto;
 }
 
-.counter-out {
+.countdown-out {
   text-align: center;
-  font-size: 200%;
+  font-family: monospace;
+  font-size: 300%;
   font-weight: bold;
+  padding: 1rem;
 }
 
-.counter-button-list {
+.countdown-button-list {
   text-align: center;
-  justify-content: space-between;
   padding: 0.5rem;
+  justify-content: space-between;
 }
 
-.counter-name {
+.countdown-name {
   color: red;
   text-align: center;
   font-size: 150%;

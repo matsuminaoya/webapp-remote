@@ -3,14 +3,24 @@
   border: 1px dotted grey;
   border-radius: 8px;
   width: max-content;
-  margin: auto;
+  margin: 1rem auto;
 }
 
 .stopwatch-out {
   text-align: center;
   font-family: monospace;
-  font-size: 370%;
+  font-size: 300%;
   font-weight: bold;
+  padding: 1rem;
+}
+
+.stopwatch-lap-label {
+  display: flex;
+  justify-content: space-between;
+  font-family: monospace;
+  font-weight: bold;
+  padding: 0.2rem;
+  margin: auto 0.8rem auto 0.8rem; 
 }
 
 .stopwatch-lap-entry {
@@ -21,7 +31,7 @@
   padding: 0.2rem;
 }
 
-.stopwatch-lap-entry .stopwatch-lap-num {
+.stopwatch-lap-num {
   width: 1rem;
   text-align: right;
 }
@@ -29,7 +39,13 @@
 .stopwatch-button-list {
   text-align: center;
   padding: 0.5rem;
-  display: flex;
   justify-content: space-between;
-  gap: 0.5rem;
+}
+
+.stopwatch-name {
+  color: red;
+  text-align: center;
+  font-size: 150%;
+  font-weight: bold;
+  padding: auto;
 }
