@@ -46,7 +46,7 @@ export const Stopwatch = (props) => {
   };
   return (
     <div className="stopwatch">
-      <div className="stopwatch-name">{"ストップウォッチ"}</div>
+      <div className="stopwatch-name">{"ストップウォッチ ver.2"}</div>
       <div className="stopwatch-out">{timeToString(displayTime)}</div>
       <div className="stopwatch-button-list">
         <button type="button" onClick={startStop}>
