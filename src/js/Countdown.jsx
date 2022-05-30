@@ -34,22 +34,16 @@ export const Countdown = (props) => {
   };
 
   const countTime10mUP = () => {
-    if (countTime < 3600000 - 1 - 600000) {
-      setCountTime(countTime + 600000);
+      setCountTime(displayTime + 600000);
       setDisplayTime(countTime);
-    }
   };
   const countTime01mUP = () => {
-    if (countTime < 3600000 - 1 - 60000) {
-      setCountTime(countTime + 60000);
+      setCountTime(displayTime + 60000);
       setDisplayTime(countTime);
-    }
   };
   const countTime10sUP = () => {
-    if (countTime < 3600000 - 1 - 10000) {
-      setCountTime(countTime + 10000);
+      setCountTime(displayTime + 10000);
       setDisplayTime(countTime);
-    }
   };
 
   const pad2 = (x) => (x < 10 ? '0' : '') + x;
@@ -67,11 +61,11 @@ export const Countdown = (props) => {
     <div className="countdowntimer">
       <div ClassName="countdowntimer-out">{timeToString(displayTime)}</div>
       <div className="stopwatch-button-list">
-        <button type="button" onClick={countTime10mUP} disabled={running && countTime > 3600000 - 1 - 600000}>+10分</button>
-        <button type="button" onClick={countTime01mUP} disabled={running && countTime > 3600000 - 1 - 60000}>+01分</button>
-        <button type="button" onClick={countTime10sUP} disabled={running && countTime > 3600000 - 1 - 10000}>+10秒</button>
         <button type="button" onClick={startStop}>
           {running ? 'ストップ' : 'スタート'}</button>
+        <button type="button" onClick={countTime10mUP} disabled={running || displayTime > 3600000 - 1 - 600000}>+10分</button>
+        <button type="button" onClick={countTime01mUP} disabled={running || displayTime > 3600000 - 1 - 60000}>+01分</button>
+        <button type="button" onClick={countTime10sUP} disabled={running || displayTime > 3600000 - 1 - 10000}>+10秒</button>
         <button type="button" onClick={reset}>リセット</button>
       </div>
     </div>
