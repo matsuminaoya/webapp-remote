@@ -24,7 +24,7 @@ ReactDOM.render(
     {/* ここから */}
     <div className="row">
       {/*<Counter initial={5} min={0} max={10} />*/}
-      <Clock />
+      {/*<Clock />*/}
       <Stopwatch />
     </div>
     {/* ここまで */}

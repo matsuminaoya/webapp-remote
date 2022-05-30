@@ -7,12 +7,28 @@ export const Clock = () => {
       setCurrentTime(Date.now());
     }, 500);
   }, [currentTime]);
-  const timeToText = (time) => {
-    return Intl.DateTimeFormat('ja-JP',
-      { hour: 'numeric', minute: 'numeric', second: 'numeric' })
-      .format(time);
+  options = {
+    year: 'numeric', month: 'numeric', day: 'numeric',
+    hour: 'numeric', minute: 'numeric', second: 'numeric',
+    hour12: false,
+    timeZone: 'Asia/Tokyo'
+  };
+  const timeToText_tyo = (time) => {
+    return Intl.DateTimeFormat('en-US', options).format(time);
+  };
+  const timeToText_lon = (time) => {
+    options.timeZone = "Europe/London"
+    return Intl.DateTimeFormat('en-US', options).format(time);
+  };
+  const timeToText_nyc = (time) => {
+    options.timeZone = "America/New_York"
+    return Intl.DateTimeFormat('en-US', options).format(time);
   };
   return (
-    <div className="clock">{timeToText(currentTime)}</div>
+    <div className="clock">
+      <div className="clock_tyo">{"TYO: " + "\t" + timeToText_tyo(currentTime)}</div>
+      <div className="clock_lon">{"LON: " + "\t" + timeToText_lon(currentTime)}</div>
+      <div className="clock_nyc">{"NYC: " + "\t" + timeToText_nyc(currentTime)}</div>
+    </div>
   );
 };

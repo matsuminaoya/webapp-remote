@@ -8,7 +8,9 @@ import { ErrorBoundary } from './ErrorBoundary';
 
 // 使用するコンポーネントをインポートする．
 /* ここから */
-
+import { Clock } from './Clock';
+import { Stopwatch } from './Stopwatch';
+import { Countdown } from './Countdown';
 
 /* ここまで */
 
@@ -17,8 +19,9 @@ ReactDOM.render(
   // Reactコンポーネントの配置．JSXで記述できる．
   <ErrorBoundary>
     {/* ここから */}
-
-
+    <Clock />
+    <Stopwatch />
+    <Countdown />
 
 
     {/* ここまで */}
