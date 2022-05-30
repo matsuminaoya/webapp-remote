@@ -1,4 +1,3 @@
-import { set, use } from 'express/lib/application';
 import { useState, useEffect, useRef } from 'react';
 
 export const Countdown = (props) => {
@@ -34,16 +33,16 @@ export const Countdown = (props) => {
   };
 
   const countTime10mUP = () => {
-      setCountTime(displayTime + 600000);
-      setDisplayTime(countTime);
+    setDisplayTime(displayTime + 600000);
+    setCountTime(displayTime + 600000);
   };
   const countTime01mUP = () => {
-      setCountTime(displayTime + 60000);
-      setDisplayTime(countTime);
+    setDisplayTime(displayTime + 60000);
+    setCountTime(displayTime + 60000);
   };
   const countTime10sUP = () => {
-      setCountTime(displayTime + 10000);
-      setDisplayTime(countTime);
+    setDisplayTime(displayTime + 10000);
+    setCountTime(displayTime + 10000);
   };
 
   const pad2 = (x) => (x < 10 ? '0' : '') + x;
@@ -61,11 +60,10 @@ export const Countdown = (props) => {
     <div className="countdowntimer">
       <div ClassName="countdowntimer-out">{timeToString(displayTime)}</div>
       <div className="stopwatch-button-list">
-        <button type="button" onClick={startStop}>
-          {running ? 'ストップ' : 'スタート'}</button>
-        <button type="button" onClick={countTime10mUP} disabled={running || displayTime > 3600000 - 1 - 600000}>+10分</button>
-        <button type="button" onClick={countTime01mUP} disabled={running || displayTime > 3600000 - 1 - 60000}>+01分</button>
-        <button type="button" onClick={countTime10sUP} disabled={running || displayTime > 3600000 - 1 - 10000}>+10秒</button>
+        <button type="button" onClick={startStop}>{running ? 'ストップ' : 'スタート'}</button>
+        <button type="button" onClick={countTime10mUP} disabled={running || displayTime >= 3600000 - 600000}>+10分</button>
+        <button type="button" onClick={countTime01mUP} disabled={running || displayTime >= 3600000 - 60000}>+01分</button>
+        <button type="button" onClick={countTime10sUP} disabled={running || displayTime >= 3600000 - 10000}>+10秒</button>
         <button type="button" onClick={reset}>リセット</button>
       </div>
     </div>
