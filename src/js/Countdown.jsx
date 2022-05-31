@@ -36,15 +36,15 @@ export const Countdown = (props) => {
 
   const countTime10mUP = () => {
     setDisplayTime(displayTime + 600000);
-    setCountTime(displayTime + 600000);
+    setCountTime(countTime + 600000);
   };
   const countTime01mUP = () => {
     setDisplayTime(displayTime + 60000);
-    setCountTime(displayTime + 60000);
+    setCountTime(countTime + 60000);
   };
   const countTime10sUP = () => {
     setDisplayTime(displayTime + 10000);
-    setCountTime(displayTime + 10000);
+    setCountTime(countTime + 10000);
   };
 
   const pad2 = (x) => (x < 10 ? '0' : '') + x;
