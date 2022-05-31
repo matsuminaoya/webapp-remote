@@ -19,7 +19,7 @@ export const Counter = (props) => {
   };
   return (
     <div className="counter">
-      <div className="counter-name">{"カウンタ ver.2"}</div>
+      <div className="counter-name">{"カウンタver.2"}</div>
       <div className="counter-out">{count}</div>
       <div className="counter-button-list">
         <button type="button" onClick={count10Up} disabled={count >= props.max}>10アップ</button>

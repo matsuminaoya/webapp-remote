@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 
 export const Presentation = (props) => {
-  const [countTime, setCountTime] = useState(180000)
+  const [countTime, setCountTime] = useState(180000);
   const [displayTime, setDisplayTime] = useState(countTime);
   const [running, setRunning] = useState(false);
   const startRef = useRef(0);
@@ -14,7 +14,7 @@ export const Presentation = (props) => {
     return () => clearTimeout(timer);
   }, [displayTime, running]);
 
-  const startStop = () => {
+  const startReset = () => {
     if (running) {
       setCountTime(180000);
       setDisplayTime(180000);
@@ -43,7 +43,7 @@ export const Presentation = (props) => {
       <div className="countdown-name">{"3分プレゼン"}</div>
       <div className="countdown-out">{(displayTime < 0) ? '- ' + timeToString(Math.abs(displayTime)) : timeToString(displayTime)}</div>
       <div className="countdown-button-list">
-        <button type="button" onClick={startStop}>{running ? 'リセット' : 'スタート'}</button>
+        <button type="button" onClick={startReset}>{running ? 'リセット' : 'スタート'}</button>
       </div>
     </div>
   );

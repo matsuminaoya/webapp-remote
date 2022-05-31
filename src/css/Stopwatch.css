@@ -15,6 +15,7 @@
 }
 
 .stopwatch-lap-label {
+  color: red;
   display: flex;
   justify-content: space-between;
   font-family: monospace;
