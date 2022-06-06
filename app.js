@@ -22,7 +22,7 @@ app.get('/createZip/', createZip);
 
 // 動作確認用
 app.get('/test', (req, res) => {
-  res.send('Template Web Application');
+  res.send('Template Web Application TEST');
 });
 
 // JSON Web Tokenを使った簡易ユーザ認証

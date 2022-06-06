@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 
 export const Countdown = (props) => {
-  const [countTime, setCountTime] = useState(0)
+  const [countTime, setCountTime] = useState(0);
   const [displayTime, setDisplayTime] = useState(countTime);
   const [running, setRunning] = useState(false);
   const startRef = useRef(0);

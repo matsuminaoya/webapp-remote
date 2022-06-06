@@ -25,11 +25,13 @@ module.exports = () => {
   // :idのタスクを返す．存在しない場合はNot Found (404)を返す．
   router.get('/:id', (req, res) => {
     /* ここから */
-
-
-
-
-
+    const id = req.params.id;
+    const item = todoList.find(item => item._id === id);
+    if (item === undefined) {
+      res.sendStatus(404);
+    } else {
+      res.json(item);
+    }
     /* ここまで */
   });
 
@@ -48,22 +50,35 @@ module.exports = () => {
   // クライアントエラー(400)の扱いとする．
   router.put('/:id', (req, res) => {
     /* ここから */
-
-
-
-
-
+    const putItem = req.body;
+    const id = req.params.id;
+    if (!putItem._id || putItem._id !== id) {
+      res.sendStatus(400);
+    } else {
+      const index = todoList.findIndex((item) => item._id === id);
+      if (index < 0) {
+        res.sendStatus(400);
+      } else {
+        // タスクを置き換えることにする．
+        todoList[index] = putItem;
+        // 204 (No Content)を返す．
+        res.sendStatus(204);
+      }
+    }
     /* ここまで */
   });
 
   // idで指定されたタスクを削除する．そのようなタスクが存在しない場合はNot Found (404)を返す．
   router.delete('/:id', (req, res) => {
     /* ここから */
-
-
-
-
-
+    const id = req.params.id;
+    const index = todoList.findIndex(item => item._id === id);
+    if (index < 0) {
+      res.sendStatus(404);
+    } else {
+      todoList.splice(index, 1);
+      res.sendStatus(204);
+    }
     /* ここまで */
   });
 
