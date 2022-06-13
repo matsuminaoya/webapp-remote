@@ -1,0 +1,47 @@
+.todolist {
+  padding: auto;
+}
+
+.todolist .todolist-title {
+  font-weight: bold;
+  padding: auto;
+}
+
+.todolist .todolist-task-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.todolist .todolist-task {
+  display: flex;
+  justify-content: space-between;
+}
+
+.todolist .todolist-task .todolist-completed {
+  flex: 0 0 2rem;
+  text-align: center;
+}
+
+.todolist .todolist-task .todolist-description {
+  flex: 1 0 auto;
+}
+
+.todolist .todolist-task .todolist-done {
+  text-decoration: line-through;
+}
+
+.todolist .todolist-task-input {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.8rem 0 0.1rem 0;
+}
+
+.todolist .todolist-task-input>input[type="text"] {
+  flex: 1 0;
+  font-size: 100%;
+}
+
+.todolist .todolist-task-input>button {
+  flex: 0 0 3rem;
+}

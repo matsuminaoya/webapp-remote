@@ -6,11 +6,9 @@
 const sampleSeparator = document.querySelector('.separator');
 const colorMapping = { '青': 'blue', '黄': 'yellow', '赤': 'red' };
 // 色の変更
-document.getElementById('color-buttons')
-  .addEventListener('click', (event) => {
-    sampleSeparator.style.borderColor
-      = colorMapping[event.target.innerText];
-  });
+document.getElementById('color-buttons').addEventListener('click', (event) => {
+  sampleSeparator.style.borderColor = colorMapping[event.target.innerText];
+});
 
 const sampleItemlist = document.querySelector('.itemize');
 // フォントを大きく
