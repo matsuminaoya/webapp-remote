@@ -1,20 +1,27 @@
 .todolist {
   padding: auto;
+  width: 80%;
+  margin: auto;
+  padding: 0.5rem;
 }
 
 .todolist .todolist-title {
   font-weight: bold;
-  padding: auto;
+  font-size: 120%;
+  padding: 0.5rem;
 }
 
 .todolist .todolist-task-list {
   display: flex;
   flex-direction: column;
+  gap: 0.5rem;
 }
 
 .todolist .todolist-task {
   display: flex;
   justify-content: space-between;
+  border-bottom: 1px dotted gray;
+  border-radius: 8px;
 }
 
 .todolist .todolist-task .todolist-completed {
