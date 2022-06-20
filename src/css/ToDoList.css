@@ -22,6 +22,12 @@
   justify-content: space-between;
   border-bottom: 1px dotted gray;
   border-radius: 8px;
+  gap: 0.5rem;
+  padding: 0 0 0 0;
+}
+
+.todolist .todolist-task>button {
+  flex: 0 0 3rem;
 }
 
 .todolist .todolist-task .todolist-completed {
