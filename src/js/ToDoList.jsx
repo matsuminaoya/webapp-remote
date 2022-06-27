@@ -1,11 +1,11 @@
-import { useState, useEffect, useRef, useContext } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 export const ToDoList = (props) => {
   const [items, setItems] = useState([]);
   const [errorMessage, setErrorMessage] = useState('');
   const [itemInput, setItemInput] = useState('');
   const inputDeadlineRef = useRef();
-
+  const inputPriorityRef = useRef();
   const getItems = async () => {
     try {
       setErrorMessage('');
@@ -34,10 +34,8 @@ export const ToDoList = (props) => {
           ...(deadline ? { deadline: deadline } : {})
         }
       });
-      // 入力エリアをクリアする．
       setItemInput('');
       inputDeadlineRef.current.value = '';
-      // ToDoリストを更新する
       getItems();
     } catch (error) {
       setErrorMessage(error.message);
@@ -46,7 +44,6 @@ export const ToDoList = (props) => {
   const setItemCompleted = async (id, event) => {
     const item = items.find((item) => item._id === id);
     if (item) {
-      /* オブジェクトリテラルのスプレッド構文を使用 */
       const copiedItem = { ...item, completed: event.target.checked };
       try {
         setErrorMessage('');
@@ -68,7 +65,6 @@ export const ToDoList = (props) => {
         method: 'delete',
         url: props.url + '/' + id,
       });
-      // TODOリストを更新する．ここでは簡単にするためすべてのアイテムをリロードする．
       getItems();
     } catch (error) {
       setErrorMessage(error.message);
@@ -127,12 +123,10 @@ export const ToDoList = (props) => {
         <button type="button" onClick={addItem} disabled={itemInput.length === 0}>
           追加</button>
       </div>
-
       {errorMessage === '' ? null :
         <div className="error-message" onClick={() => setErrorMessage('')}>
           {errorMessage}
         </div>}
-
     </div>
   );
 };
