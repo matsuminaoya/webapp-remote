@@ -5,7 +5,6 @@ export const ToDoList = (props) => {
   const [errorMessage, setErrorMessage] = useState('');
   const [itemInput, setItemInput] = useState('');
   const inputDeadlineRef = useRef();
-  const inputPriorityRef = useRef();
   const getItems = async () => {
     try {
       setErrorMessage('');

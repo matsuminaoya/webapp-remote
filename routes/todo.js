@@ -20,10 +20,9 @@ module.exports = () => {
     try {
       // データベースからタスク一覧を求める．
       /* ここから */
-
-
-
-
+      const items = await req.app.locals.db.collection(COLLECTION_NAME)
+        .find({}).sort({ _id: 1 }).toArray();
+      res.json(items);
       /* ここまで */
     } catch (error) {
       res.status(500).send(error.message);
@@ -32,43 +31,75 @@ module.exports = () => {
 
   router.get('/:id', async (req, res) => {
     /* ここから */
-
-
-
-
-
+    try {
+      const id = req.params.id;
+      const item = await req.app.locals.db.collection(COLLECTION_NAME)
+        .findOne({ _id: new ObjectId(id) });
+      if (item === undefined) {
+        res.sendStatus(404);
+      } else {
+        res.json(item);
+      }
+    } catch (error) {
+      res.status(500).send(error.message);
+    }
     /* ここまで */
   });
 
   router.post('/', async (req, res) => {
     /* ここから */
-
-
-
-
-
+    try {
+      const newItem = req.body;
+      const { _id, ...item } = newItem;
+      const result = await req.app.locals.db.collection(COLLECTION_NAME)
+        .insertOne(item);
+      const id = result.insertedId;
+      res.status(201).location(`${req.baseUrl}/${id}`).send();
+    } catch (error) {
+      res.status(500).send(error.message);
+    }
     /* ここまで */
   });
 
   // idで指定されたタスクを更新する．
   router.put('/:id', async (req, res) => {
     /* ここから */
-
-
-
-
-
+    try {
+      const putItem = req.body;
+      const id = req.params.id;
+      if (!putItem._id || putItem._id !== id) {
+        res.sendStatus(400);
+      } else {
+        const { _id, ...item } = putItem;
+        const result = await req.app.locals.db.collection(COLLECTION_NAME)
+          .updateOne({ _id: new ObjectId(id) }, { $set: item });
+        if (result.matchedCount === 0) {
+          res.sendStatus(400);
+        } else {
+          res.sendStatus(204);
+        }
+      }
+    } catch (error) {
+      res.status(500).send(error.message);
+    }
     /* ここまで */
   });
 
   // idで指定されたタスクを削除する．そのようなタスクが存在しない場合はNot Found (404)を返す．
   router.delete('/:id', async (req, res) => {
     /* ここから */
-
-
-
-
-
+    try {
+      const id = req.params.id;
+      const result = await req.app.locals.db.collection(COLLECTION_NAME)
+        .deleteOne({ _id: new ObjectId(id) });
+      if (result.deletedCount == 0) {
+        res.sendStatus(404);
+      } else {
+        res.sendStatus(204);
+      }
+    } catch (error) {
+      res.status(500).send(error.message);
+    }
     /* ここまで */
   });
 

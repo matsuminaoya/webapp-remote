@@ -21,7 +21,7 @@ import { ToDoList } from './ToDoList';
 ReactDOM.render(
   // Reactコンポーネントの配置．JSXで記述できる．
   <ErrorBoundary>
-    <ToDoList url="/mock-todo" />
+    <ToDoList url="/todo" />
     {/*<Hello />*/}
     {/* ここから */}
     {/*<div className="row">*/}
