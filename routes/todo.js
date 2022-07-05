@@ -14,14 +14,14 @@ module.exports = () => {
   router.get('/', async (req, res) => {
     // ユーザ認証がある場合は条件を追加する．
     /* ここから */
-
-
+    const filter = req.user ?
+      { $or: [{ username: req.user.username }, { username: null }] } : {};
     /* ここまで */
     try {
       // データベースからタスク一覧を求める．
       /* ここから */
       const items = await req.app.locals.db.collection(COLLECTION_NAME)
-        .find({}).sort({ _id: 1 }).toArray();
+        .find(filter).sort({ _id: 1 }).toArray();
       res.json(items);
       /* ここまで */
     } catch (error) {
@@ -30,11 +30,12 @@ module.exports = () => {
   });
 
   router.get('/:id', async (req, res) => {
-    /* ここから */
+    const filter = req.user ?
+      { $or: [{ username: req.user.username }, { username: null }] } : {};
     try {
       const id = req.params.id;
       const item = await req.app.locals.db.collection(COLLECTION_NAME)
-        .findOne({ _id: new ObjectId(id) });
+        .findOne({ _id: new ObjectId(id), ...filter });
       if (item === undefined) {
         res.sendStatus(404);
       } else {
@@ -63,6 +64,8 @@ module.exports = () => {
 
   // idで指定されたタスクを更新する．
   router.put('/:id', async (req, res) => {
+    const filter = req.user ?
+      { $or: [{ username: req.user.username }, { username: null }] } : {};
     /* ここから */
     try {
       const putItem = req.body;
@@ -72,7 +75,7 @@ module.exports = () => {
       } else {
         const { _id, ...item } = putItem;
         const result = await req.app.locals.db.collection(COLLECTION_NAME)
-          .updateOne({ _id: new ObjectId(id) }, { $set: item });
+          .updateOne({ _id: new ObjectId(id), ...filter }, { $set: item });
         if (result.matchedCount === 0) {
           res.sendStatus(400);
         } else {
@@ -87,11 +90,13 @@ module.exports = () => {
 
   // idで指定されたタスクを削除する．そのようなタスクが存在しない場合はNot Found (404)を返す．
   router.delete('/:id', async (req, res) => {
+    const filter = req.user ?
+      { $or: [{ username: req.user.username }, { username: null }] } : {};
     /* ここから */
     try {
       const id = req.params.id;
       const result = await req.app.locals.db.collection(COLLECTION_NAME)
-        .deleteOne({ _id: new ObjectId(id) });
+        .deleteOne({ _id: new ObjectId(id), ...filter });
       if (result.deletedCount == 0) {
         res.sendStatus(404);
       } else {

@@ -9,6 +9,7 @@ import { ErrorBoundary } from './ErrorBoundary';
 // import { Hello } from './Hello';
 /* ここから */
 import { ToDoList } from './ToDoList';
+import { Authenticate } from './Authenticate';
 // import { Counter } from './Counter';
 // import { Clock } from './Clock';
 // import { Stopwatch } from './Stopwatch';
@@ -21,15 +22,12 @@ import { ToDoList } from './ToDoList';
 ReactDOM.render(
   // Reactコンポーネントの配置．JSXで記述できる．
   <ErrorBoundary>
-    <ToDoList url="/todo" />
-    {/*<Hello />*/}
-    {/* ここから */}
-    {/*<div className="row">*/}
-    {/*<Counter initial={5} min={0} max={10} />*/}
-    {/*<Clock />*/}
-    {/*<Stopwatch />*/}
-    {/*</div>*/}
-    {/* ここまで */}
+    <div className="row">
+      <Authenticate>
+        <ToDoList url="/todo-secure" />
+      </Authenticate>
+      <ToDoList url="/todo" />
+    </div>
   </ErrorBoundary >,
   // id属性がrootのHTML要素を求める．
   document.getElementById('root')

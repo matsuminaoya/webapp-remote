@@ -1,16 +1,23 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useContext } from 'react';
 import axios from 'axios';
+import { LoginContext } from './Authenticate';
+
 export const ToDoList = (props) => {
   const [items, setItems] = useState([]);
   const [errorMessage, setErrorMessage] = useState('');
   const [itemInput, setItemInput] = useState('');
   const inputDeadlineRef = useRef();
+  const inputPriorityRef = useRef();
+  const user = useContext(LoginContext);
+  const authHeader = user ? {'Authorization': 'Bearer ' + user.token } : {};
+
   const getItems = async () => {
     try {
       setErrorMessage('');
       const response = await axios({
         method: 'get',
         url: props.url,
+        headers: authHeader
       });
       setItems(response.data);
     } catch (error) {
@@ -22,6 +29,7 @@ export const ToDoList = (props) => {
   };
   const addItem = async () => {
     const deadline = inputDeadlineRef.current.value;
+    const priority = inputPriorityRef.current.value;
     try {
       setErrorMessage('');
       await axios({
@@ -30,11 +38,15 @@ export const ToDoList = (props) => {
         data: {
           task: itemInput,
           completed: false,
-          ...(deadline ? { deadline: deadline } : {})
-        }
+          ...(deadline ? { deadline: deadline } : {}),
+          ...(priority !== '0' ? { priority: priority } : {}),
+          ...(user ? { username: user.username } : {})
+        },
+        headers: authHeader
       });
       setItemInput('');
       inputDeadlineRef.current.value = '';
+      inputPriorityRef.current.value = '0';
       getItems();
     } catch (error) {
       setErrorMessage(error.message);
@@ -86,6 +98,23 @@ export const ToDoList = (props) => {
       }
     }
   };
+  const setItemPriority = async (id, event) => {
+    const item = items.find((item) => item._id === id);
+    if (item) {
+      const copiedItem = { ...item, priority: event.target.value };
+      try {
+        setErrorMessage('');
+        await axios({
+          method: 'put',
+          url: props.url + '/' + id,
+          data: copiedItem,
+        });
+        getItems();
+      } catch (error) {
+        setErrorMessage(error.message);
+      }
+    }
+  };
 
   useEffect(() => {
     getItems();
@@ -109,6 +138,13 @@ export const ToDoList = (props) => {
                 {row['task']}</span>
               <input type="date" value={row['deadline']}
                 onChange={setItemDeadline.bind(null, row['_id'])} />
+              <select value={row['priority'] || '0'}
+                onChange={setItemPriority.bind(null, row['_id'])}>
+                <option value="3">★★★</option>
+                <option value="2">★★☆</option>
+                <option value="1">★☆☆</option>
+                <option value="0">☆☆☆</option>
+              </select>
               <button type="button" onClick={deleteItem.bind(null, row['_id'])}>
                 削除</button>
             </div>
@@ -119,6 +155,12 @@ export const ToDoList = (props) => {
         <input type="text" onChange={handleItemInput}
           placeholder="タスク" value={itemInput} />
         <input type="date" ref={inputDeadlineRef} />
+        <select defaultValue="0" ref={inputPriorityRef}>
+          <option value="3">★★★</option>
+          <option value="2">★★☆</option>
+          <option value="1">★☆☆</option>
+          <option value="0">☆☆☆</option>
+        </select>
         <button type="button" onClick={addItem} disabled={itemInput.length === 0}>
           追加</button>
       </div>

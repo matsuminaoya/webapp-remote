@@ -1,20 +1,20 @@
 .todolist {
-  padding: auto;
-  width: 80%;
+  padding: 0.8rem;
   margin: auto;
-  padding: 0.5rem;
+  border: 1px dotted gray;
+  border-radius: 8px;
 }
 
 .todolist .todolist-title {
   font-weight: bold;
   font-size: 120%;
-  padding: 0.5rem;
+  padding: 0 0 0.5rem 0;
 }
 
 .todolist .todolist-task-list {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.3rem;
 }
 
 .todolist .todolist-task {
@@ -22,7 +22,7 @@
   justify-content: space-between;
   border-bottom: 1px dotted gray;
   border-radius: 8px;
-  gap: 0.5rem;
+  gap: 0.1rem;
   padding: 0 0 0 0;
 }
 
@@ -46,8 +46,8 @@
 .todolist .todolist-task-input {
   display: flex;
   justify-content: space-between;
-  gap: 0.5rem;
-  padding: 0.8rem 0 0.1rem 0;
+  gap: 0.1rem;
+  padding: 0.5rem 0 0rem 0;
 }
 
 .todolist .todolist-task-input>input[type="text"] {
