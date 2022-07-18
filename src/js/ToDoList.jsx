@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef, useContext } from 'react';
 import axios from 'axios';
 import { LoginContext } from './Authenticate';
+import { SocketContext } from './WithSocket';
 
 export const ToDoList = (props) => {
   const [items, setItems] = useState([]);
@@ -9,7 +10,28 @@ export const ToDoList = (props) => {
   const inputDeadlineRef = useRef();
   const inputPriorityRef = useRef();
   const user = useContext(LoginContext);
-  const authHeader = user ? {'Authorization': 'Bearer ' + user.token } : {};
+  const authHeader = user ? { 'Authorization': 'Bearer ' + user.token } : {};
+  const socketRef = useContext(SocketContext);
+  const socket = socketRef ? socketRef.current : null;
+
+  useEffect(() => {
+    if (socket) {
+      const todoUpdate = () => {
+        getItems();
+      }
+      socket.on('todo-update', todoUpdate);
+      return () => {
+        socket.removeListener('todo-update', todoUpdate);
+      };
+    }
+  }, []);
+  const updateItems = () => {
+    if (socket) {
+      socket.emit('todo-update');
+    } else {
+      getItems();
+    }
+  }
 
   const getItems = async () => {
     try {
@@ -47,7 +69,7 @@ export const ToDoList = (props) => {
       setItemInput('');
       inputDeadlineRef.current.value = '';
       inputPriorityRef.current.value = '0';
-      getItems();
+      updateItems();
     } catch (error) {
       setErrorMessage(error.message);
     }
@@ -62,25 +84,27 @@ export const ToDoList = (props) => {
           method: 'put',
           url: props.url + '/' + id,
           data: copiedItem,
+          headers: authHeader
         });
-        getItems();
+        updateItems();
       } catch (error) {
         setErrorMessage(error.message);
       }
     }
-  }
+  };
   const deleteItem = async (id) => {
     try {
       setErrorMessage('');
       await axios({
         method: 'delete',
         url: props.url + '/' + id,
+        headers: authHeader
       });
-      getItems();
+      updateItems();
     } catch (error) {
       setErrorMessage(error.message);
     }
-  }
+  };
   const setItemDeadline = async (id, event) => {
     const item = items.find((item) => item._id === id);
     if (item) {
@@ -90,9 +114,10 @@ export const ToDoList = (props) => {
         await axios({
           method: 'put',
           url: props.url + '/' + id,
-          data: copiedItem
+          data: copiedItem,
+          headers: authHeader
         });
-        getItems();
+        updateItems();
       } catch (error) {
         setErrorMessage(error.message);
       }
@@ -108,8 +133,9 @@ export const ToDoList = (props) => {
           method: 'put',
           url: props.url + '/' + id,
           data: copiedItem,
+          headers: authHeader
         });
-        getItems();
+        updateItems();
       } catch (error) {
         setErrorMessage(error.message);
       }
