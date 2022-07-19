@@ -7,12 +7,22 @@ export const ToDoList = (props) => {
   const [items, setItems] = useState([]);
   const [errorMessage, setErrorMessage] = useState('');
   const [itemInput, setItemInput] = useState('');
+
   const inputDeadlineRef = useRef();
   const inputPriorityRef = useRef();
   const user = useContext(LoginContext);
   const authHeader = user ? { 'Authorization': 'Bearer ' + user.token } : {};
   const socketRef = useContext(SocketContext);
   const socket = socketRef ? socketRef.current : null;
+  const username = user ? { username: user.username } : {};
+  const [taskUsername, setTaskUsername] = useState('*');
+
+  const handleTaskUsernameInput = (event) => {
+    setTaskUsername(event.target.value);
+  }
+  const handleItemInput = (event) => {
+    setItemInput(event.target.value);
+  };
 
   useEffect(() => {
     if (socket) {
@@ -46,9 +56,6 @@ export const ToDoList = (props) => {
       setErrorMessage(error.message);
     }
   };
-  const handleItemInput = (event) => {
-    setItemInput(event.target.value);
-  };
   const addItem = async () => {
     const deadline = inputDeadlineRef.current.value;
     const priority = inputPriorityRef.current.value;
@@ -62,7 +69,8 @@ export const ToDoList = (props) => {
           completed: false,
           ...(deadline ? { deadline: deadline } : {}),
           ...(priority !== '0' ? { priority: priority } : {}),
-          ...(user ? { username: user.username } : {})
+          //...(user ? { username: user.username } : {}),
+          ...(taskUsername === '*' ? {} : username)
         },
         headers: authHeader
       });
@@ -142,6 +150,7 @@ export const ToDoList = (props) => {
     }
   };
 
+
   useEffect(() => {
     getItems();
   }, []);
@@ -176,8 +185,19 @@ export const ToDoList = (props) => {
             </div>
           ))}
         </div>}
-
       <div className="todolist-task-input">
+        {user ?
+          <form className="todolist-task-username">
+            <label>
+              <input type="radio" name="name" value={user.username}
+                checked={taskUsername === user.username}
+                onChange={handleTaskUsernameInput} />
+              {user.username}</label>
+            <label>
+              <input type="radio" name="name" value="*"
+                checked={taskUsername === '*'}
+                onChange={handleTaskUsernameInput} />*</label>
+          </form> : null}
         <input type="text" onChange={handleItemInput}
           placeholder="タスク" value={itemInput} />
         <input type="date" ref={inputDeadlineRef} />

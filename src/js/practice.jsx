@@ -9,8 +9,9 @@ import { ErrorBoundary } from './ErrorBoundary';
 // import { Hello } from './Hello';
 /* ここから */
 import { ToDoList } from './ToDoList';
-// import { Authenticate } from './Authenticate';
+import { Authenticate } from './Authenticate';
 import { WithSocket } from './WithSocket';
+import { TextChat } from './TextChat';
 // import { Counter } from './Counter';
 // import { Clock } from './Clock';
 // import { Stopwatch } from './Stopwatch';
@@ -24,9 +25,14 @@ ReactDOM.render(
   // Reactコンポーネントの配置．JSXで記述できる．
   <ErrorBoundary>
     <div className="row">
-      <WithSocket nsp="/todo-support">
-        <ToDoList url="/todo" />
-      </WithSocket>
+      <Authenticate>
+        <WithSocket nsp="/text-chat">
+          <div className="row">
+            <ToDoList url="/todo-secure" />
+            <TextChat />
+          </div>
+        </WithSocket>
+      </Authenticate>
     </div>
   </ErrorBoundary >,
   // id属性がrootのHTML要素を求める．

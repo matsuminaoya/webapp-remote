@@ -1,0 +1,52 @@
+.text-chat {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 0rem;
+  padding: 0.8rem;
+  border: 1px dotted gray;
+  border-radius:8px;
+  width: 80%;
+}
+
+.text-chat .text-chat-message-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-height: 100%;
+  padding: 0 0.1rem;
+}
+
+.text-chat .text-chat-message-list-container {
+  height: 6rem;
+  overflow: auto;
+}
+
+.text-chat .text-chat-message-list .text-chat-from-me {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.text-chat .text-chat-message-list .text-chat-from-them {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.text-chat .text-chat-input {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.2rem;
+  width: 100%;
+}
+
+.text-chat .text-chat-input select {
+  flex: 1 0 auto;
+}
+
+.text-chat .text-chat-input input {
+  flex: 5 0 auto;
+}
+
+.text -chat .text -chat -input button {
+  flex: 0 0 auto;
+}

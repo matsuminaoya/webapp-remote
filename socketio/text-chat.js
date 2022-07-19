@@ -88,10 +88,10 @@ module.exports = (io) => {
 
     // ToDoリストのアプリと共用できるようにtodo-updateのサポートを追加する．
     /* ここから */
-
-
-
-
+    socket.on('todo-update', () => {
+      // todo-updateのメッセージをブロードキャストする．
+      io.emit('todo-update');
+    });
     /* ここまで */
   });
 }
