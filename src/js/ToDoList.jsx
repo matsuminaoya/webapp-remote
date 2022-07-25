@@ -168,6 +168,7 @@ export const ToDoList = (props) => {
                 <input type="checkbox" checked={row['completed']}
                   onChange={setItemCompleted.bind(null, row['_id'])} />
               </span>
+              {row['username'] ? <span>【{row['username']}】</span> : <span>【*】</span>}
               <span className={"todolist-description" +
                 (row['completed'] ? " todolist-done" : "")}>
                 {row['task']}</span>
