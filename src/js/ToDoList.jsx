@@ -183,30 +183,30 @@ export const ToDoList = (props) => {
       </div>
       {items.length === 0 ? null :
         <div className="todolist-task-list">
-            {items.map((row) => (
-              <div className="todolist-task" key={row['_id']}>
-                <span className="todolist-completed">
-                  <input type="checkbox" checked={row['completed']}
-                    onChange={setItemCompleted.bind(null, row['_id'])} />
-                </span>
-                {row['username'] ? <span>【{row['username']}】</span> : <span>【本部】</span>}
-                <span className={"todolist-description" +
-                  (row['completed'] ? " todolist-done" : "")}>
-                  {row['task']}</span>
-                <input type="text" valu={row['mail']}
-                  onChange={setItemMail.bind(null, row['_id'])} />
-                <input type="date" value={row['deadline']}
-                  onChange={setItemDeadline.bind(null, row['_id'])} />
-                <select value={row['priority'] || '0'}
-                  onChange={setItemPriority.bind(null, row['_id'])}>
-                  <option value="2">男</option>
-                  <option value="1">女</option>
-                  <option value="0">性別</option>
-                </select>
-                <button type="button" onClick={deleteItem.bind(null, row['_id'])}>
-                  削除</button>
-              </div>
-            ))}
+          {items.map((row) => (
+            <div className="todolist-task" key={row['_id']}>
+              <span className="todolist-completed">
+                <input type="checkbox" checked={row['completed']}
+                  onChange={setItemCompleted.bind(null, row['_id'])} />
+              </span>
+              {row['username'] ? <span>【{row['username']}】</span> : <span>【本部】</span>}
+              <span className={"todolist-description" +
+                (row['completed'] ? " todolist-done" : "")}>
+                {row['task']}</span>
+              <input type="text" value={row['mail']}
+                onChange={setItemMail.bind(null, row['_id'])} />
+              <input type="date" value={row['deadline']}
+                onChange={setItemDeadline.bind(null, row['_id'])} />
+              <select value={row['priority'] || '0'}
+                onChange={setItemPriority.bind(null, row['_id'])}>
+                <option value="2">男</option>
+                <option value="1">女</option>
+                <option value="0">性別</option>
+              </select>
+              <button type="button" onClick={deleteItem.bind(null, row['_id'])}>
+                削除</button>
+            </div>
+          ))}
         </div>}
       <div className="todolist-task-input">
         {user ?
@@ -240,4 +240,4 @@ export const ToDoList = (props) => {
         </div>}
     </div>
   );
-};
+}
