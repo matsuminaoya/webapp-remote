@@ -8,8 +8,8 @@ export const ToDoList = (props) => {
   const [errorMessage, setErrorMessage] = useState('');
   const [itemInput, setItemInput] = useState('');
 
-  const inputDeadlineRef = useRef();
-  const inputPriorityRef = useRef();
+  const inputBirthRef = useRef();
+  const inputGenderRef = useRef();
   const inputMailRef = useRef();
   const user = useContext(LoginContext);
   const authHeader = user ? { 'Authorization': 'Bearer ' + user.token } : {};
@@ -58,9 +58,9 @@ export const ToDoList = (props) => {
     }
   };
   const addItem = async () => {
-    const deadline = inputDeadlineRef.current.value;
-    const priority = inputPriorityRef.current.value;
-    const mail = inputMailRef.current.value;
+    const Birth = inputBirthRef.current.value;
+    const Gender = inputGenderRef.current.value;
+    const Mail = inputMailRef.current.value;
     try {
       setErrorMessage('');
       await axios({
@@ -68,16 +68,16 @@ export const ToDoList = (props) => {
         url: props.url,
         data: {
           task: itemInput,
-          ...(deadline ? { deadline: deadline } : {}),
-          ...(priority !== '0' ? { priority: priority } : {}),
-          ...(mail ? { mail: mail } : {}),
+          ...(Birth ? { Birth: Birth } : {}),
+          ...(Gender !== '0' ? { Gender: Gender } : {}),
+          ...(Mail ? { Mail: Mail } : {}),
           ...(taskUsername === '*' ? {} : username)
         },
         headers: authHeader
       });
       setItemInput('');
-      inputDeadlineRef.current.value = '';
-      inputPriorityRef.current.value = '0';
+      inputBirthRef.current.value = '';
+      inputGenderRef.current.value = '0';
       inputMailRef.current.value = '';
       updateItems();
     } catch (error) {
@@ -97,10 +97,10 @@ export const ToDoList = (props) => {
       setErrorMessage(error.message);
     }
   };
-  const setItemDeadline = async (id, event) => {
+  const setItemBirth = async (id, event) => {
     const item = items.find((item) => item._id === id);
     if (item) {
-      const copiedItem = { ...item, deadline: event.target.value };
+      const copiedItem = { ...item, Birth: event.target.value };
       try {
         setErrorMessage('');
         await axios({
@@ -115,10 +115,10 @@ export const ToDoList = (props) => {
       }
     }
   };
-  const setItemPriority = async (id, event) => {
+  const setItemGender = async (id, event) => {
     const item = items.find((item) => item._id === id);
     if (item) {
-      const copiedItem = { ...item, priority: event.target.value };
+      const copiedItem = { ...item, Gender: event.target.value };
       try {
         setErrorMessage('');
         await axios({
@@ -151,11 +151,11 @@ export const ToDoList = (props) => {
               <span className={"todolist-description" +
                 (row['completed'] ? " todolist-done" : "")}>
                 {row['task']}</span>
-              {row['mail']}
-              <input type="date" value={row['deadline']}
-                onChange={setItemDeadline.bind(null, row['_id'])} />
-              <select value={row['priority'] || '0'}
-                onChange={setItemPriority.bind(null, row['_id'])}>
+              {row['Mail']}
+              <input type="date" value={row['Birth']}
+                onChange={setItemBirth.bind(null, row['_id'])} />
+              <select value={row['Gender'] || '0'}
+                onChange={setItemGender.bind(null, row['_id'])}>
                 <option value="2">男</option>
                 <option value="1">女</option>
                 <option value="0">性別</option>
@@ -182,8 +182,8 @@ export const ToDoList = (props) => {
           placeholder="氏名" value={itemInput} />
         <input type="text" ref={inputMailRef}
           placeholder="メールアドレス" />
-        <input type="date" ref={inputDeadlineRef} />
-        <select defaultValue="0" ref={inputPriorityRef}>
+        <input type="date" ref={inputBirthRef} />
+        <select defaultValue="0" ref={inputGenderRef}>
           <option value="2">男</option>
           <option value="1">女</option>
           <option value="0">性別</option>
