@@ -51,7 +51,7 @@ export const Authenticate = (props) => {
   return (user ?
     <div>
       <div className="authenticate-logout">
-        <span>User: {user ? user.username : ''} </span>
+        <span>team: {user ? user.username : ''} </span>
         <button type="button" onClick={logout}>ログアウト</button>
       </div>
       <LoginContext.Provider value={user}>
@@ -62,13 +62,13 @@ export const Authenticate = (props) => {
     <div>
       <div className="authenticate">
         <label>
-          <span>ユーザ名:</span>
-          <input type="text" placeholder="ユーザ名"
+          <span>チーム名：</span>
+          <input type="text" placeholder="チーム名"
             onChange={(event) => setUsernameInput(event.target.value)}
             value={usernameInput} />
         </label>
         <label>
-          <span>パスワード:</span>
+          <span>パスワード：</span>
           <input type="password" ref={passwordInputRef}
             placeholder="パスワード" defaultValue='' />
         </label>

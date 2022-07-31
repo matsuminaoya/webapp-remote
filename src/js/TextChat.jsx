@@ -83,7 +83,7 @@ export const TextChat = () => {
       </div>
       <div className="text-chat-input">
         <select onChange={selectChatTo} value={chatTo}>
-          <option value="*">*</option>
+          <option value="*">全体</option>
           {userlist.map((u) => <option key={u} value={u}>{u}</option>)}
         </select>
         <input type="text" onChange={inputChanged} value={inputMessage} />

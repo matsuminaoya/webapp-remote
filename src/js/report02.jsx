@@ -8,10 +8,10 @@ import { ErrorBoundary } from './ErrorBoundary';
 
 // 使用するコンポーネント
 /* ここから */
-
-
-
-
+import { ToDoList } from './ToDoList';
+import { Authenticate } from './Authenticate';
+import { WithSocket } from './WithSocket';
+import { TextChat } from './TextChat';
 /* ここまで */
 
 // Reactコンポーネントを idがrootのDOM要素に配置する．
@@ -19,11 +19,15 @@ ReactDOM.render(
   // Reactコンポーネントの配置．JSXで記述できる．
   <ErrorBoundary>
     {/* ここから */}
-
-
-
-
-
+    <div className="row">
+      <Authenticate>
+        <WithSocket nsp="/text-chat">
+          <div className="row">
+            <ToDoList url="/todo-secure" />
+          </div>
+        </WithSocket>
+      </Authenticate>
+    </div>
     {/* ここまで */}
   </ErrorBoundary>,
   // id属性がrootのHTML要素を求める．
