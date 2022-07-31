@@ -10,7 +10,7 @@ export const ToDoList = (props) => {
 
   const inputDeadlineRef = useRef();
   const inputPriorityRef = useRef();
-  const inputMailRef = useRef();
+  const inputNameRef = useRef();
   const user = useContext(LoginContext);
   const authHeader = user ? { 'Authorization': 'Bearer ' + user.token } : {};
   const socketRef = useContext(SocketContext);
@@ -36,6 +36,7 @@ export const ToDoList = (props) => {
       };
     }
   }, []);
+
   const updateItems = () => {
     if (socket) {
       socket.emit('todo-update');
@@ -57,10 +58,11 @@ export const ToDoList = (props) => {
       setErrorMessage(error.message);
     }
   };
+
   const addItem = async () => {
     const deadline = inputDeadlineRef.current.value;
     const priority = inputPriorityRef.current.value;
-    const mail = inputMailRef.current.value;
+    const name = inputNameRef.current.value;
     try {
       setErrorMessage('');
       await axios({
@@ -71,7 +73,7 @@ export const ToDoList = (props) => {
           completed: false,
           ...(deadline ? { deadline: deadline } : {}),
           ...(priority !== '0' ? { priority: priority } : {}),
-          ...(mail ? { mail: mail } : {}),
+          ...(name ? { neme: name } : {}),
           ...(taskUsername === '*' ? {} : username)
         },
         headers: authHeader
@@ -79,12 +81,13 @@ export const ToDoList = (props) => {
       setItemInput('');
       inputDeadlineRef.current.value = '';
       inputPriorityRef.current.value = '0';
-      inputMailRef.current.value = '';
+      inputNameRef.current.value = '';
       updateItems();
     } catch (error) {
       setErrorMessage(error.message);
     }
   };
+
   const setItemCompleted = async (id, event) => {
     const item = items.find((item) => item._id === id);
     if (item) {
@@ -103,6 +106,7 @@ export const ToDoList = (props) => {
       }
     }
   };
+
   const deleteItem = async (id) => {
     try {
       setErrorMessage('');
@@ -116,6 +120,7 @@ export const ToDoList = (props) => {
       setErrorMessage(error.message);
     }
   };
+
   const setItemDeadline = async (id, event) => {
     const item = items.find((item) => item._id === id);
     if (item) {
@@ -134,6 +139,7 @@ export const ToDoList = (props) => {
       }
     }
   };
+
   const setItemPriority = async (id, event) => {
     const item = items.find((item) => item._id === id);
     if (item) {
@@ -152,25 +158,6 @@ export const ToDoList = (props) => {
       }
     }
   };
-  const setItemMail = async (id, event) => {
-    const item = items.find((item) => item._id === id);
-    if (item) {
-      const copiedItem = { ...item, mail: event.target.value };
-      try {
-        setErrorMessage('');
-        await axios({
-          method: 'put',
-          url: props.url + '/' + id,
-          data: copiedItem,
-          headers: authHeader
-        });
-        updateItems();
-      } catch (error) {
-        setErrorMessage(error.message);
-      }
-    }
-  };
-
 
   useEffect(() => {
     getItems();
@@ -179,36 +166,33 @@ export const ToDoList = (props) => {
   return (
     <div className="todolist">
       <div className="todolist-title" onClick={getItems}>
-        [{user.username}] チームメンバー
+        チーム{user.username}
       </div>
       {items.length === 0 ? null :
         <div className="todolist-task-list">
           {items.map((row) => (
             <div className="todolist-task" key={row['_id']}>
-              <span className="todolist-completed">
-                <input type="checkbox" checked={row['completed']}
-                  onChange={setItemCompleted.bind(null, row['_id'])} />
-              </span>
-              {row['username'] ? <span>【{row['username']}】</span> : <span>【本部】</span>}
               <span className={"todolist-description" +
                 (row['completed'] ? " todolist-done" : "")}>
                 {row['task']}</span>
-              <input type="text" value={row['mail']}
-                onChange={setItemMail.bind(null, row['_id'])} />
-              <input type="date" value={row['deadline']}
-                onChange={setItemDeadline.bind(null, row['_id'])} />
+              {row['username'] ? null : <span>【本部】</span>}
+              {row['name']}
               <select value={row['priority'] || '0'}
                 onChange={setItemPriority.bind(null, row['_id'])}>
                 <option value="2">男</option>
                 <option value="1">女</option>
                 <option value="0">性別</option>
               </select>
+              <input type="date" value={row['deadline']}
+                onChange={setItemDeadline.bind(null, row['_id'])} />
               <button type="button" onClick={deleteItem.bind(null, row['_id'])}>
                 削除</button>
             </div>
           ))}
         </div>}
       <div className="todolist-task-input">
+        <input type="text" onChange={handleItemInput}
+          placeholder="メールアドレス" value={itemInput} />
         {user ?
           <form className="todolist-task-username">
             <label>
@@ -221,16 +205,14 @@ export const ToDoList = (props) => {
                 checked={taskUsername === '*'}
                 onChange={handleTaskUsernameInput} />本部</label>
           </form> : null}
-        <input type="text" onChange={handleItemInput}
-          placeholder="氏名" value={itemInput} />
-        <input type="text" ref={inputMailRef}
-          placeholder="メールアドレス" />
-        <input type="date" ref={inputDeadlineRef} />
+        <input type="text" ref={inputNameRef}
+          placeholder="氏名" />
         <select defaultValue="0" ref={inputPriorityRef}>
           <option value="2">男</option>
           <option value="1">女</option>
           <option value="0">性別</option>
         </select>
+        <input type="date" ref={inputDeadlineRef} />
         <button type="button" onClick={addItem} disabled={itemInput.length === 0}>
           追加</button>
       </div>
@@ -240,4 +222,4 @@ export const ToDoList = (props) => {
         </div>}
     </div>
   );
-}
+};
