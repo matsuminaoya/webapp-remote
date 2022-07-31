@@ -11,7 +11,6 @@ import { ErrorBoundary } from './ErrorBoundary';
 import { ToDoList } from './ToDoList';
 import { Authenticate } from './Authenticate';
 import { WithSocket } from './WithSocket';
-import { TextChat } from './TextChat';
 /* ここまで */
 
 // Reactコンポーネントを idがrootのDOM要素に配置する．
