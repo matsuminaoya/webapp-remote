@@ -11,6 +11,7 @@ export const ToDoList = (props) => {
   const inputBirthRef = useRef();
   const inputGenderRef = useRef();
   const inputMailRef = useRef();
+
   const user = useContext(LoginContext);
   const authHeader = user ? { 'Authorization': 'Bearer ' + user.token } : {};
   const socketRef = useContext(SocketContext);
@@ -36,6 +37,7 @@ export const ToDoList = (props) => {
       };
     }
   }, []);
+
   const updateItems = () => {
     if (socket) {
       socket.emit('todo-update');
@@ -57,6 +59,7 @@ export const ToDoList = (props) => {
       setErrorMessage(error.message);
     }
   };
+
   const addItem = async () => {
     const Birth = inputBirthRef.current.value;
     const Gender = inputGenderRef.current.value;
@@ -84,6 +87,7 @@ export const ToDoList = (props) => {
       setErrorMessage(error.message);
     }
   };
+
   const deleteItem = async (id) => {
     try {
       setErrorMessage('');
@@ -97,6 +101,7 @@ export const ToDoList = (props) => {
       setErrorMessage(error.message);
     }
   };
+
   const setItemBirth = async (id, event) => {
     const item = items.find((item) => item._id === id);
     if (item) {
@@ -115,6 +120,7 @@ export const ToDoList = (props) => {
       }
     }
   };
+
   const setItemGender = async (id, event) => {
     const item = items.find((item) => item._id === id);
     if (item) {
